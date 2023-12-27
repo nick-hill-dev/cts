@@ -1,0 +1,110 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Concise Table Schema",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#optionSets"
+		},
+		{
+			"include": "#tablesAndFields"
+		},
+		{
+			"include": "#links"
+		},
+		{
+			"include": "#lookups"
+		},
+		{
+			"include": "#attributes"
+		},
+		{
+			"include": "#data"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.cts",
+					"match": "^\\s*//(.*)"
+				}
+			]
+		},
+		"optionSets": {
+			"patterns": [
+				{
+					"name": "markup.bold.cts",
+					"match": "^(\\w+)(?=\\?)"
+				},
+				{
+					"name": "variable.name.cts",
+					"match": "(?=\\?)(.+)"
+				}
+			]
+		},
+		"tablesAndFields": {
+			"patterns": [
+				{
+					"name": "markup.bold.cts",
+					"match": "^(\\w+)(?=\\>)"
+				},
+				{
+					"name": "variable.name.cts",
+					"match": "(?=\\>)(.+)"
+				}
+			]
+		},
+		"links": {
+			"patterns": [
+				{
+					"name": "markup.bold.cts",
+					"match": "^(\\w+\\.\\w+\\-\\w+\\.\\w+)(?=\\{)"
+				}
+			]
+		},
+		"lookups": {
+			"patterns": [
+				{
+					"name": "markup.bold.cts",
+					"match": "^(\\w+)(?=\\&)"
+				},
+				{
+					"name": "variable.name.cts",
+					"match": "(?=\\&)(.+)"
+				}
+			]
+		},
+		"attributes": {
+			"patterns": [
+				{
+					"name": "markup.bold.cts",
+					"match": "^(\\w+\\.\\w+\\.\\w+)(?=\\@)"
+				},
+				{
+					"name": "variable.name.cts",
+					"match": "(?=\\@)(.+)"
+				}
+			]
+		},
+		"data": {
+			"patterns": [
+				{
+					"name": "markup.bold.cts",
+					"match": "^(\\w+)(?=\\+)"
+				},
+				{
+					"name": "markup.inserted.cts",
+					"match": "\\+([^\\|]+)(?=\\|)"
+				},
+				{
+					"name": "markup.underline.cts",
+					"match": "\\|([\\w]+)$"
+				}
+			]
+		}
+	},
+	"scopeName": "source.cts"
+}

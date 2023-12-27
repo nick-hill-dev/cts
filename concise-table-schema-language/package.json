@@ -1,0 +1,25 @@
+{
+  "name": "concise-table-schema-language",
+  "displayName": "Concise Table Schema Language",
+  "description": "Enables syntax highlighting for CTS files.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "cts",
+      "aliases": ["Concise Table Schema", "cts"],
+      "extensions": [".cts"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "cts",
+      "scopeName": "source.cts",
+      "path": "./syntaxes/cts.tmLanguage.json"
+    }]
+  }
+}
