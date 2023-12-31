@@ -36,7 +36,7 @@
 		"optionSets": {
 			"patterns": [
 				{
-					"name": "markup.bold.cts",
+					"name": "keyword.cts",
 					"match": "^(\\w+)(?=\\?)"
 				},
 				{
@@ -48,7 +48,7 @@
 		"tablesAndFields": {
 			"patterns": [
 				{
-					"name": "markup.bold.cts",
+					"name": "keyword.cts",
 					"match": "^(\\w+)(?=\\>)"
 				},
 				{
@@ -60,7 +60,7 @@
 		"links": {
 			"patterns": [
 				{
-					"name": "markup.bold.cts",
+					"name": "keyword.cts",
 					"match": "^(\\w+\\.\\w+\\-\\w+\\.\\w+)(?=\\{)"
 				}
 			]
@@ -68,7 +68,7 @@
 		"lookups": {
 			"patterns": [
 				{
-					"name": "markup.bold.cts",
+					"name": "keyword.cts",
 					"match": "^(\\w+)(?=\\&)"
 				},
 				{
@@ -80,8 +80,8 @@
 		"attributes": {
 			"patterns": [
 				{
-					"name": "markup.bold.cts",
-					"match": "^(\\w+\\.\\w+\\.\\w+)(?=\\@)"
+					"name": "keyword.cts",
+					"match": "^(\\w+(\\.\\w+){0,2}+)(?=@)"
 				},
 				{
 					"name": "variable.name.cts",
@@ -92,7 +92,7 @@
 		"data": {
 			"patterns": [
 				{
-					"name": "markup.bold.cts",
+					"name": "keyword.cts",
 					"match": "^(\\w+)(?=\\+)"
 				},
 				{
