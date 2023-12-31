@@ -2,7 +2,7 @@
 
 CTS is a language for describing database schema as concisely as possible.
 
-This extension enables syntax highlighting for `.cte` files.
+This extension enables syntax highlighting for `.cts` files.
 
 ## Release Notes
 
