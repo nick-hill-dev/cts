@@ -15,7 +15,9 @@ Field names can have suffixes to define their types, I.E. `%` is an `integer` fi
 
 The `Product` table is a child of the `Group` table.
 
-Additional documentation will be created in due course.
+## Specification
+
+For more information about CTS specification, please [refer here](./concise-table-schema-language/README.md).
 
 ## License
 
