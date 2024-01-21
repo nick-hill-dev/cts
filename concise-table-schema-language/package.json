@@ -2,7 +2,7 @@
   "name": "concise-table-schema-language",
   "displayName": "Concise Table Schema Language",
   "description": "Enables syntax highlighting for CTS files.",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.85.0"
   },

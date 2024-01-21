@@ -5,20 +5,12 @@ Visibility? visible, hidden
 // Tables and Fields
 Platform> Id%, Name
 Group> Id%, Title, Intro, BackgroundImage*
-Product> Id%, Group.Id, Name, Maturity~Maturity, Visibility~Visibility, Summary, Description, Icon*
-ProductTag> Id%, Product.Id, Tag
-ProductScreenshot> Id%, Product.Id, Name, Caption, File*
-ProductLink> Id%, Product.Id, Label, Url, Summary
-Release> Id%, Product.Id, Version, Maturity~Maturity, ReleaseDate#
-ReleaseFile> Id%, Release.Id, Platform.Id, Title, Description, File*
-
-// Table Links
-Group.Id-Product.GroupId{
-Product.Id-ProductTag.ProductId{
-Product.Id-ProductLink.ProductId{
-Product.Id-ProductScreenshot.ProductId{
-Product.Id-Release.ProductId{
-Release.Id-ReleaseFile.ReleaseId{
+Product> Id%, {Group.Id, Name, ~Maturity, ~Visibility, Summary, Description, Icon*
+ProductTag> Id%, {Product.Id, Tag
+ProductScreenshot> Id%, {Product.Id, Name, Caption, File*
+ProductLink> Id%, {Product.Id, Label, Url, Summary
+Release> Id%, {Product.Id, Version, ~Maturity, ReleaseDate#
+ReleaseFile> Id%, {Release.Id, Platform.Id, Title, Description, File*
 
 // Lookups
 Platform& "{Name}"

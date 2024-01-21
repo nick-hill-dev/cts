@@ -19,6 +19,9 @@
 			"include": "#data"
 		},
 		{
+			"include": "#csv"
+		},
+		{
 			"include": "#tables"
 		},
 		{
@@ -83,20 +86,42 @@
 		"data": {
 			"patterns": [
 				{
-					"name": "keyword.cts",
-					"match": "^(\\w+)(?=\\+)"
-				},
-				{
-					"name": "constant.numeric.cts",
-					"match": "(\\[\\w+\\])"
-				},
-				{
-					"name": "constant.numeric.cts",
-					"match": "(\\{.+\\})"
-				},
-				{
-					"name": "constant.numeric.cts",
-					"match": "\\|(\\w+)"
+					"name": "data.cts",
+					"match": "^(\\w+)(\\+)(\\s*)(.*?)(\\|)(\\w*)",
+					"captures": {
+						"1": {
+							"name": "keyword.cts"
+						},
+						"2": {
+							"name": "punctuation.definition.separator.cts"
+						},
+						"3": {
+							"name": "punctuation.definition.separator.cts"
+						},
+						"4": {
+							"name": "csv.line.cts",
+							"patterns": [
+								{
+									"name": "comma.cts",
+									"match": ","
+								},
+								{
+									"name": "variable.parameter.cts",
+									"match": "\\[.+\\]"
+								},
+								{
+									"name": "string.quoted.cts",
+									"match": "[^,]+"
+								}
+							]
+						},
+						"5": {
+							"name": "punctuation.definition.separator.cts"
+						},
+						"6": {
+							"name": "variable.parameter.cts"
+						}
+					}
 				}
 			]
 		},
