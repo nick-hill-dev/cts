@@ -1,0 +1,22 @@
+{
+	"Insert CTS table": {
+		"prefix": "ctst",
+		"body": ["${1:TableName}> ${2:Id%}, ${3:ColumnName}$0"],
+		"description": "Insert CTS table"
+	},
+	"Insert CTS lookup": {
+		"prefix": "ctsl",
+		"body": ["${1:LookupName}& \"${2:Format}\"$0"],
+		"description": "Insert CTS lookup"
+	},
+	"Insert CTS annotation": {
+		"prefix": "ctsa",
+		"body": ["${1:Path}@ ${2:\"JSON\"}$0"],
+		"description": "Insert CTS annotation"
+	},
+	"Insert CTS data row": {
+		"prefix": "ctsd",
+		"body": ["${1:TableName}+ ${2:FieldValue}|${3:variableName}$0"],
+		"description": "Insert CTS data row"
+	}
+}

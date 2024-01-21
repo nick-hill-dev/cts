@@ -10,6 +10,10 @@ This extension enables syntax highlighting for `.cts` files.
 
 Initial release of CTS.
 
+# Debugging
+
+Simple `F5` debugging permits debugging.
+
 # Compiling
 
 You need `vsce`: `npm install -g vsce`.

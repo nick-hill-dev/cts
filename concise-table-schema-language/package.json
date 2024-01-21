@@ -10,16 +10,34 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "cts",
-      "aliases": ["Concise Table Schema", "cts"],
-      "extensions": [".cts"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "cts",
-      "scopeName": "source.cts",
-      "path": "./syntaxes/cts.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "cts",
+        "aliases": [
+          "Concise Table Schema",
+          "cts"
+        ],
+        "extensions": [
+          ".cts"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "cts",
+        "scopeName": "source.cts",
+        "path": "./syntaxes/cts.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.json": "json"
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "cts",
+        "path": "./snippets/cts.code-snippets"
+      }
+    ]
   }
 }
