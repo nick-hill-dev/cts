@@ -3,6 +3,11 @@
   "displayName": "Concise Table Schema Language",
   "description": "Enables syntax highlighting for CTS files.",
   "version": "1.0.0",
+  "publisher": "HillSoftware",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nick-hill-dev/cts"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
