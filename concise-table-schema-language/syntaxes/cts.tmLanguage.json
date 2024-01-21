@@ -137,15 +137,11 @@
 			"patterns": [
 				{
 					"name": "constant.numeric.cts",
-					"match": "(\\w+\\~\\w+\\.\\w+)"
+					"match": "\\w*[{~](\\w+\\.\\w+)"
 				},
 				{
 					"name": "variable.name.cts",
 					"match": "(\\w?\\~\\w+)"
-				},
-				{
-					"name": "constant.numeric.cts",
-					"match": "\\{?(\\w+\\.\\w+)"
 				},
 				{
 					"name": "variable.name.cts",
