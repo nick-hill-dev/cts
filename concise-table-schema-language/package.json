@@ -1,13 +1,19 @@
 {
   "name": "concise-table-schema-language",
   "displayName": "Concise Table Schema Language",
-  "description": "Enables syntax highlighting for CTS files.",
-  "version": "1.0.1",
+  "description": "Enables syntax highlighting for CTS files and supports generation of SQL scripts from CTS.",
+  "version": "1.1.0",
   "publisher": "HillSoftware",
   "icon": "icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/nick-hill-dev/cts"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node ./out/test/runTest.js"
   },
   "engines": {
     "vscode": "^1.85.0"
@@ -15,6 +21,7 @@
   "categories": [
     "Programming Languages"
   ],
+  "main": "./bin/extension.js",
   "contributes": {
     "languages": [
       {
@@ -44,6 +51,20 @@
         "language": "cts",
         "path": "./snippets/cts.code-snippets"
       }
+    ],
+    "commands": [
+      {
+        "command": "extension.createSqlScript",
+        "title": "CTS: Compile to SQL Script (Postgres)"
+      }
     ]
+  },
+  "activationEvents": [
+    "onCommand:extension.createSqlScript"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3",
+    "vscode": "^1.0.0"
   }
 }
