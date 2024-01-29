@@ -2,7 +2,7 @@
 
 CTS is a language for describing database schema as concisely as possible.
 
-This extension enables syntax highlighting for `.cts` files as well as a few code snippets. There is also a command which generates Postgres SQL table creation scripts based on the currently active `.cts` file. This command is called `CTS: Compile to SQL Script (Postgres)`.
+This extension enables syntax highlighting for `.cts` files as well as a few code snippets. There are also commands which generate scripts based on the currently active `.cts` file, for example a Postgres SQL table creation script. These commands have the prefix `CTS:`.
 
 ## CTS Definition
 
@@ -94,6 +94,41 @@ CREATE TABLE "Release" (
 );
 ```
 
+## Compiling to TypeScript Interfaces
+
+You can use the `CTS: Compile to Typescript` command to compile a CTS to a Typescript file. For example, in the Group / Product / Release example above, the following SQL is generated:
+
+```typescript
+type Maturity = 'alpha' | 'beta' | 'release';
+
+type Visibility = 'visible' | 'hidden';
+
+interface IGroup {
+    id: number;
+    title: string;
+}
+
+interface IProduct {
+    id: number;
+    groupId: number;
+    name: string;
+    maturity: string;
+    visibility: string;
+    summary: string;
+    description: string;
+    latestRelease: number;
+}
+
+interface IRelease {
+    id: number;
+    productId: number;
+    version: string;
+    maturity: string;
+    releaseDate: string;
+}
+
+```
+
 ## Code Snippets
 
 You can use the following code snippets in Visual Studio Code:
@@ -111,3 +146,7 @@ Initial release of CTS, just the syntax highlighting along with some code snippe
 ### 1.1.0
 
 Can now generate a Postgres SQL script from a CTS via the `CTS: Compile to SQL Script (Postgres)` command.
+
+### 1.2.0
+
+Can now generate a set of TypeScript interfaces, each one a representation of a table and its fields via the `CTS: Compile to Typescript` command.

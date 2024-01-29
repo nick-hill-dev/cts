@@ -2,7 +2,7 @@
   "name": "concise-table-schema-language",
   "displayName": "Concise Table Schema Language",
   "description": "Enables syntax highlighting for CTS files and supports generation of SQL scripts from CTS.",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "publisher": "HillSoftware",
   "icon": "icon.png",
   "repository": {
@@ -56,11 +56,16 @@
       {
         "command": "extension.createSqlScript",
         "title": "CTS: Compile to SQL Script (Postgres)"
+      },
+      {
+        "command": "extension.createTypescript",
+        "title": "CTS: Compile to TypeScript"
       }
     ]
   },
   "activationEvents": [
-    "onCommand:extension.createSqlScript"
+    "onCommand:extension.createSqlScript",
+    "onCommand:extension.createTypescript"
   ],
   "devDependencies": {
     "@types/node": "^20.11.5",

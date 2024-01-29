@@ -10,7 +10,9 @@ export default class CtsFieldDefinition {
 
     public relatedFieldName: string | undefined;
 
-    public type!: string;
+    public sqlType!: string;
+
+    public jsType!: string;
 
     public constructor(public readonly name: string) {
     }

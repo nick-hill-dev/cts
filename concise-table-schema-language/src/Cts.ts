@@ -57,7 +57,8 @@ export default class Cts {
                     let relatedTable = result.tables.find(t => t.tableName === field.relatedTableName);
                     let relatedField = relatedTable?.fields.find(f => f.name === field.relatedFieldName);
                     if (relatedField) {
-                        field.type = relatedField.type === 'BIGSERIAL' ? 'BIGINT' : relatedField.type;
+                        field.sqlType = relatedField.sqlType === 'BIGSERIAL' ? 'BIGINT' : relatedField.sqlType;
+                        field.jsType = relatedField.jsType;
                     }
                 }
             }
@@ -82,6 +83,7 @@ export default class Cts {
             const name = fieldInfo?.groups?.name as string;
             const type = fieldInfo?.groups?.type;
 
+            let jsType = this.getJsType(type, fieldDefinition);
             let sqlType = this.getSqlType(type, i, fieldDefinition);
 
             let fieldName = prefix.length > 1 ? prefix?.substring(0, prefix.length - 1) : name;
@@ -89,13 +91,14 @@ export default class Cts {
                 fieldName = name.replace('.', '');
             }
             let field = new CtsFieldDefinition(fieldName);
-            field.type = sqlType;
+            field.jsType = jsType;
+            field.sqlType = sqlType;
             field.isEnum = prefix.endsWith('~') && name.indexOf('.') === -1;
             field.isChild = !field.isEnum && (prefix?.endsWith('{') ?? false);
             field.isLookup = !field.isEnum && (prefix?.endsWith('~') ?? false);
 
             if (field.isEnum) {
-                field.type = `"${name}"`;
+                field.sqlType = `"${name}"`;
             }
 
             if (field.isChild || field.isLookup) {
@@ -109,6 +112,28 @@ export default class Cts {
             i++;
         }
         return result;
+    }
+
+    private getJsType(type: string | undefined, fieldDefinition: string) {
+        let jsType = 'string';
+        switch (type) {
+            case '%':
+            case '$':
+                jsType = 'number';
+                break;
+
+            case '*':
+                jsType = 'object';
+                break;
+
+            case '#':
+            case undefined:
+                break;
+
+            default:
+                throw new Error(`Unknown field type for field ${fieldDefinition}: ${type}`);
+        }
+        return jsType;
     }
 
     private getSqlType(type: string | undefined, fieldPosition: number, fieldDefinition: string) {
