@@ -145,23 +145,7 @@
 				},
 				{
 					"name": "variable.name.cts",
-					"match": "(\\w+\\%)"
-				},
-				{
-					"name": "variable.name.cts",
-					"match": "(\\w+\\*)"
-				},
-				{
-					"name": "variable.name.cts",
-					"match": "(\\w+\\#)"
-				},
-				{
-					"name": "variable.name.cts",
-					"match": "(\\w+\\$)"
-				},
-				{
-					"name": "variable.name.cts",
-					"match": "(\\w+)"
+					"match": "(\\w+)(@#|#@|\\?|\\%|\\$|\\#|\\*|\\@)?(\\[\\])?"
 				}
 			]
 		},

@@ -1,6 +1,6 @@
 # Debugging
 
-Simple `F5` debugging permits debugging.
+Simple `F5` debugging permits debugging, so long as your VS Code window is scoped to the `concise-table-schema-language` folder.
 
 # Compiling
 
