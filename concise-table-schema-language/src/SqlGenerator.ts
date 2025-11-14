@@ -44,27 +44,33 @@ export default class SqlGenerator {
         // TODO: Experimental, and does not currently work
         /*
         for (let record of cts.records) {
-           let actualFields = [];
-           for (let fieldValue of record.fieldValues) {
-              if (fieldValue.startsWith('[') && fieldValue.endsWith(']')) {
-                 const variableName = fieldValue.substring(1, fieldValue.length - 1);
-                 actualFields.push(`"${variableName}.${variableName}"`);
-              } else {
-                 actualFields.push(`'${fieldValue}'`);
-              }
-           }
+            const table = cts.tables.find(t => t.tableName === record.tableName);
+            if (!table) {
+                continue;
+            }
 
-           let statement = `INSERT INTO "${record.tableName}" VALUES (${actualFields.join(', ')})`;
-           if (record.targetVariableName) {
-              let table = cts.tables.find(t => t.tableName === record.tableName);
-              writer.writeLineThenIndent(`WITH "${record.targetVariableName}" AS (`);
-              writer.writeLine(`${statement} RETURNING "${table?.fields[0].name}" AS "${record.targetVariableName}"`);
-              writer.unindent();
-              writer.writeLine(`)`)
+            let actualFields = [];
+            for (let fieldValue of record.fieldValues) {
+                if (fieldValue.startsWith('[') && fieldValue.endsWith(']')) {
+                    const variableName = fieldValue.substring(1, fieldValue.length - 1);
+                    actualFields.push(`"${variableName}.${variableName}"`);
+                } else {
+                    actualFields.push(`'${fieldValue}'`);
+                }
+            }
 
-           } else {
-              writer.writeLine(`${statement}`);
-           }
+            const fieldNames = table.fields.map(f => `"${f.name}"`) ?? [];
+            let statement = `INSERT INTO "${record.tableName}" (${fieldNames.join(', ')}) VALUES (${actualFields.join(', ')})`;
+            if (record.targetVariableName) {
+                let table = cts.tables.find(t => t.tableName === record.tableName);
+                writer.writeLineThenIndent(`WITH "${record.targetVariableName}" AS (`);
+                writer.writeLine(`${statement} RETURNING "${table?.fields[0].name}" AS "${record.targetVariableName}"`);
+                writer.unindent();
+                writer.writeLine(`)`)
+
+            } else {
+                writer.writeLine(`${statement}`);
+            }
 
         }
         */
