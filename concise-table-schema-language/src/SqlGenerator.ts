@@ -25,7 +25,7 @@ export default class SqlGenerator {
                 if (field.isChild) {
                     fieldLines.push(`${ref} ON UPDATE CASCADE ON DELETE CASCADE`);
                 } else {
-                    fieldLines.push(`${ref} UPDATE RESTRICT ON DELETE SET NULL`);
+                    fieldLines.push(`${ref} ON UPDATE RESTRICT ON DELETE SET NULL`);
                 }
             }
             let j = 0;
