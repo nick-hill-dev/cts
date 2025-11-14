@@ -144,8 +144,18 @@
 					"match": "(\\w?\\~\\w+)"
 				},
 				{
-					"name": "variable.name.cts",
-					"match": "(\\w+)(@#|#@|\\?|\\%|\\$|\\#|\\*|\\@)?(\\[\\])?"
+					"match": "(\\w+)(@#|#@|\\?|\\%|\\$|\\#|\\*|\\@)?(\\[\\])?",
+					"captures": {
+						"1": {
+							"name": "variable.name.cts"
+						},
+						"2": {
+							"name": "entity.name.tag.cts"
+						},
+						"3": {
+							"name": "entity.name.tag.cts"
+						}
+					}
 				}
 			]
 		},
