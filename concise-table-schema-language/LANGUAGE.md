@@ -285,36 +285,36 @@ Person.FirstName.ValidationRules@ { "minLength": 2, "maxLength": 50, "allowSpeci
 ## Complete Example
 
 ```
-# System annotations
+// System annotations
 Version@ "2.0.0"
 Author@ "Development Team"
 
-# Enums
+// Enums
 Status? draft, published, archived
 Priority? low, medium, high
 
-# Tables
+// Tables
 User> Id%, Username, Email, IsActive?
 Category> Id%, Name, ~Status
 Post> Id%, {User.Id, {Category.Id, Title, Content, ~Priority, PublishedAt#@
 
-# Lookup Display Formats
+// Lookup Display Formats
 User& "{Username} ({Email})"
 Category& "{Name}"
 Post& "{Title}"
 
-# Table annotations
+// Table annotations
 Post.Description@ "Blog posts written by users"
 Post.DisplayName@ "Blog Posts"
 
-# Field annotations
+// Field annotations
 User.Email.Required@ true
 User.Email.Pattern@ "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
 Post.Title.MaxLength@ 200
 Post.Content.Required@ true
 Post.Content.ValidationRules@ { "minLength": 10, "maxLength": 5000 }
 
-# Initial data
+// Initial data
 User+ admin, admin@example.com, true|admin
 Category+ Announcements, published|announcements
 Post+ [admin], [announcements], Welcome Post, Welcome to our platform!, high, 2024-01-01 10:00:00
@@ -344,7 +344,7 @@ This order ensures that all referenced entities exist before they are used.
 2. **Use meaningful names**: Table and field names should be self-documenting
 3. **Define parent tables first**: Always define parent tables before child tables
 4. **Capture primary keys**: Use variable names when inserting records that will be referenced
-5. **Comment your schema**: Use `#` for single-line comments
+5. **Comment your schema**: Use `//` for single-line comments
 6. **Be consistent**: Use consistent naming conventions throughout your schema
 7. **Validate data types**: Ensure record values match the expected field types
 8. **Use JSON for annotations**: All annotation values must be valid JSON
