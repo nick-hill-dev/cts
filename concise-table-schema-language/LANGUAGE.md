@@ -219,7 +219,7 @@ Product+ [books], CTS Guide, 29.99
 
 This section describes an extension to the base CTS language. It is not supported everywhere.
 
-Annotations provide metadata about the schema at three levels: system, table, and field.
+Annotations provide metadata about the schema at three levels: system, table, and field. **Annotation values are JSON**.
 
 #### 7.1 System Annotations
 
@@ -227,14 +227,15 @@ Apply to the entire schema using the `@` symbol with no prefix.
 
 **Syntax:**
 ```
-AnnotationName@ value
+AnnotationName@ json_value
 ```
 
 **Example:**
 ```
-Version@ 1.0.0
-Author@ John Doe
-DatabaseEngine@ postgres
+Version@ "1.0.0"
+Author@ "John Doe"
+DatabaseEngine@ "postgres"
+Configuration@ { "maxConnections": 100, "timeout": 30 }
 ```
 
 #### 7.2 Table Annotations
@@ -243,14 +244,15 @@ Apply to specific tables using `TableName.AnnotationName@`.
 
 **Syntax:**
 ```
-TableName.AnnotationName@ value
+TableName.AnnotationName@ json_value
 ```
 
 **Example:**
 ```
 Person> Id%, FirstName, LastName
-Person.Description@ Stores information about people
-Person.DisplayName@ People
+Person.Description@ "Stores information about people"
+Person.DisplayName@ "People"
+Person.Options@ { "cacheable": true, "ttl": 3600 }
 ```
 
 #### 7.3 Field Annotations
@@ -259,20 +261,23 @@ Apply to specific fields using `TableName.FieldName.AnnotationName@`.
 
 **Syntax:**
 ```
-TableName.FieldName.AnnotationName@ value
+TableName.FieldName.AnnotationName@ json_value
 ```
 
 **Example:**
 ```
 Person> Id%, FirstName, LastName, Email
 Person.Email.Required@ true
-Person.Email.Pattern@ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+Person.Email.Pattern@ "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 Person.FirstName.MaxLength@ 50
+Person.FirstName.ValidationRules@ { "minLength": 2, "maxLength": 50, "allowSpecialChars": false }
 ```
 
 **Rules:**
 - Annotations should be defined after the entities they annotate
-- Annotation values are freeform strings
+- Annotation values must be valid JSON (strings, numbers, booleans, objects, arrays, or null)
+- String values should be enclosed in double quotes
+- Object and array values follow standard JSON syntax
 - Common annotations: Required, MaxLength, MinLength, Pattern, Description, DisplayName
 
 ---
@@ -281,8 +286,8 @@ Person.FirstName.MaxLength@ 50
 
 ```
 # System annotations
-Version@ 2.0.0
-Author@ Development Team
+Version@ "2.0.0"
+Author@ "Development Team"
 
 # Enums
 Status? draft, published, archived
@@ -299,14 +304,15 @@ Category& "{Name}"
 Post& "{Title}"
 
 # Table annotations
-Post.Description@ Blog posts written by users
-Post.DisplayName@ Blog Posts
+Post.Description@ "Blog posts written by users"
+Post.DisplayName@ "Blog Posts"
 
 # Field annotations
 User.Email.Required@ true
-User.Email.Pattern@ ^[^\s@]+@[^\s@]+\.[^\s@]+$
+User.Email.Pattern@ "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
 Post.Title.MaxLength@ 200
 Post.Content.Required@ true
+Post.Content.ValidationRules@ { "minLength": 10, "maxLength": 5000 }
 
 # Initial data
 User+ admin, admin@example.com, true|admin
@@ -341,3 +347,5 @@ This order ensures that all referenced entities exist before they are used.
 5. **Comment your schema**: Use `#` for single-line comments
 6. **Be consistent**: Use consistent naming conventions throughout your schema
 7. **Validate data types**: Ensure record values match the expected field types
+8. **Use JSON for annotations**: All annotation values must be valid JSON
+9. **Escape special characters**: Remember to escape backslashes and quotes in JSON string values
