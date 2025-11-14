@@ -12,15 +12,20 @@ A table and its fields are defined on a single line, with a `>` character indica
 Person> Id%, FirstName, LastName
 ```
 
-The first field in a table is always its primary key. You can see how the `Id` column has a `%` suffix, which is the suffix used to identify the column as an integer field. By default fields are of type `string`. The following suffixes are available:
+The first field in a table is always its primary key. You can see how the `Id` column has a `%` suffix, which is the suffix used to identify the column as an integer field. By default fields are of type `String`. The following suffixes are available:
 
-| Suffix | Meaning | Example |
+| Suffix | Type | Example |
 |---|---|---|
 | (none) | String | `FullName` |
-| % | Integer | `Id%` |
+| ? | Boolean | `IsOnline?` |
+| % | Long | `PercentComplete%` |
+| $ | Double | `BankBalance$` |
+| # | Date | `DateOfBirth#` |
+| @ | Time | `StartTime@` |
+| #@ | Date and Time | `LastModified#@` |
 | * | BLOB | `UploadedDocument*` |
-| # | Date and Time | `CreateDate#` |
-| $ | Currency | `Salary$` |
+
+Arrays are denoted by adding `[]` to the end of the definition, for example `FullName[]` and `StartTime@[]`.
 
 It is also possible to define enum types (via `?`) and use them for specific fields:
 
@@ -128,6 +133,10 @@ interface IRelease {
 }
 
 ```
+
+## Full Language Spec
+
+For more details about the full CTS language spec see [LANGUAGE.md](./LANGUAGE.md).
 
 ## Code Snippets
 
