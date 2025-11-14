@@ -159,3 +159,7 @@ Can now generate a Postgres SQL script from a CTS via the `CTS: Compile to SQL S
 ### 1.2.0
 
 Can now generate a set of TypeScript interfaces, each one a representation of a table and its fields via the `CTS: Compile to Typescript` command.
+
+### 1.3.0
+
+Support for additional field types.
