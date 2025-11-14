@@ -94,7 +94,7 @@ CREATE TABLE "Release" (
     "ProductId" BIGINT NULL,
     "Version" VARCHAR NULL,
     "Maturity" "Maturity" NULL,
-    "ReleaseDate" TIMESTAMP NULL,
+    "ReleaseDate" DATE NULL,
     CONSTRAINT "Release_ProductId_FKey" FOREIGN KEY ("ProductId") REFERENCES "Product" ("Id") ON UPDATE CASCADE ON DELETE CASCADE
 );
 ```

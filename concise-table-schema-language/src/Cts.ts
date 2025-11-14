@@ -78,13 +78,15 @@ export default class Cts {
         const result = new CtsTableDefinition(tableName);
         let i = 0;
         for (let fieldDefinition of line.split(',').map(l => l.trim())) {
-            let fieldInfo = /^(?<prefix>(\w*[{~])?)(?<name>[\w.]+)(?<type>[^\w])?\s*$/.exec(fieldDefinition);
+            const regex = /^(?<prefix>(\w*[{~])?)(?<name>[\w.]+)(?<type>(\?|\%|\$|\#|\*|\@|\@#|#@))?(?<arr>\[\])?\s*$/
+            let fieldInfo = regex.exec(fieldDefinition);
             const prefix = fieldInfo?.groups?.prefix ?? '';
             const name = fieldInfo?.groups?.name as string;
             const type = fieldInfo?.groups?.type;
+            const isArray = (fieldInfo?.groups?.arr ?? '') === '[]';
 
-            let jsType = this.getJsType(type, fieldDefinition);
-            let sqlType = this.getSqlType(type, i, fieldDefinition);
+            let jsType = this.getJsType(type, isArray, fieldDefinition);
+            let sqlType = this.getSqlType(type, isArray, i, fieldDefinition);
 
             let fieldName = prefix.length > 1 ? prefix?.substring(0, prefix.length - 1) : name;
             if (prefix.length === 1 && (prefix === '{' || prefix === '~')) {
@@ -114,9 +116,13 @@ export default class Cts {
         return result;
     }
 
-    private getJsType(type: string | undefined, fieldDefinition: string) {
+    private getJsType(type: string | undefined, isArray: boolean, fieldDefinition: string) {
         let jsType = 'string';
         switch (type) {
+            case '?':
+                jsType = 'boolean';
+                break;
+
             case '%':
             case '$':
                 jsType = 'number';
@@ -127,41 +133,57 @@ export default class Cts {
                 break;
 
             case '#':
+            case '@':
+            case '#@':
+            case '@#':
             case undefined:
                 break;
 
             default:
                 throw new Error(`Unknown field type for field ${fieldDefinition}: ${type}`);
         }
-        return jsType;
+        return isArray ? `${jsType}[]` : jsType;
     }
 
-    private getSqlType(type: string | undefined, fieldPosition: number, fieldDefinition: string) {
+    private getSqlType(type: string | undefined, isArray: boolean, fieldPosition: number, fieldDefinition: string) {
         let sqlType = 'VARCHAR';
         switch (type) {
+            case '?':
+                sqlType = 'BOOLEAN';
+                break;
+
             case '%':
                 sqlType = fieldPosition === 0 ? 'BIGSERIAL' : 'BIGINT';
+                break;
+
+            case '$':
+                sqlType = 'DOUBLE PRECISION';
+                break;
+
+            case '#':
+                sqlType = 'DATE';
+                break;
+
+            case '@':
+                sqlType = 'TIME';
+                break;
+
+            case '#@':
+            case '@#':
+                sqlType = 'TIMESTAMP';
                 break;
 
             case '*':
                 sqlType = 'BYTEA';
                 break;
 
-            case '#':
-                sqlType = 'TIMESTAMP';
-                break;
-
-            case '$':
-                sqlType = 'NUMERIC(10, 2)';
-                break;
-
             case undefined:
                 break;
 
             default:
                 throw new Error(`Unknown field type for field ${fieldDefinition}: ${type}`);
         }
-        return sqlType;
+        return isArray ? `${sqlType}[]` : sqlType;
     }
 
     private parseRecord(tableName: string, line: string): CtsRecordDefinition {
