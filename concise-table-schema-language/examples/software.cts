@@ -10,7 +10,7 @@ ProductTag> Id%, {Product.Id, Tag
 ProductScreenshot> Id%, {Product.Id, Name, Caption, File*
 ProductLink> Id%, {Product.Id, Label, Url, Summary
 Release> Id%, {Product.Id, Version, ~Maturity, ReleaseDate#
-ReleaseFile> Id%, {Release.Id, Platform.Id, Title, Description, File*
+ReleaseFile> Id%, {Release.Id, ~Platform.Id, Title, Description, File*
 
 // Lookups
 Platform& "{Name}"
